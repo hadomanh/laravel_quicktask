@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Repositories\User\UserRepository;
+use App\Repositories\User\UserRepositoryImplement;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        app()->singleton(
+            'App\Repositories\User\User\Repository',
+            'App\Repositories\User\User\RepositoryImplement'
+        );
     }
 
     /**
