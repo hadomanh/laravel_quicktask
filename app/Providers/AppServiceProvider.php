@@ -16,10 +16,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        app()->singleton(
-            'App\Repositories\User\User\Repository',
-            'App\Repositories\User\User\RepositoryImplement'
-        );
+        $models = [
+            'User',
+            'Todo',
+        ];
+        foreach ($models as $model)
+            app()->singleton(
+                'App\Repositories\\' . $model . '\\' . $model . 'Repository',
+                'App\Repositories\\' . $model . '\\' . $model . 'RepositoryImplement'
+            );
     }
 
     /**

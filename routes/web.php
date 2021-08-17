@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('todo')->group(function () {
+        Route::get('/', 'TodoController@index')->middleware('auth');
+        Route::get('/add', 'TodoController@add')->middleware('auth');
+        Route::get('/edit', 'TodoController@edit')->middleware('auth');
+        Route::get('/delete/{id}', 'TodoController@delete')->middleware('auth');
+    });
+});
