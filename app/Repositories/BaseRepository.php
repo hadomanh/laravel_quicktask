@@ -76,6 +76,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function update($data, $id, $withTrashed = false)
     {
         $obj = $withTrashed ? $this->model->withTrashed()->findOrFail($id) : $this->model->findOrFail($id);
+
         return $obj->update($data);
     }
 
@@ -93,6 +94,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function destroy($id)
     {
         $obj = $this->model->findOrFail($id);
+
         return $obj->delete();
     }
 
@@ -143,6 +145,7 @@ abstract class BaseRepository implements RepositoryInterface
     public function restore($id)
     {
         $obj = $this->model->withTrashed()->findOrFail($id);
+
         return $obj->restore();
     }
 
@@ -163,6 +166,7 @@ abstract class BaseRepository implements RepositoryInterface
             return $this->create($data)->id;
         }
         $this->update($data, $id);
+        
         return $id;
     }
 
